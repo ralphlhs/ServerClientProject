@@ -7,13 +7,19 @@ using System.Net.Sockets;
 using System.Net.WebSockets;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 
 namespace Client
 {
     internal class Program
     {
+        
         static void Main(string[] args)
         {
+            var json = new JObject();
+            json.Add("message", "안녕하세요.");
+            Console.WriteLine(json);
+
             Socket serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             //소켓뚫기
             IPEndPoint serverEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 4000);
@@ -25,16 +31,17 @@ namespace Client
 
             int cal = 100 + 200;
             String message = $"안녕하세요.{cal}";
+            String message2 = json.ToString();
 
-            buffer = Encoding.UTF8.GetBytes(message);
+            buffer = Encoding.UTF8.GetBytes(message2);
 
             int SendLength = serverSocket.Send(buffer, 0, buffer.Length, SocketFlags.None);
 
             //블럭킹
             byte[] buffer2 = new byte[1024];
             int RecvLength = serverSocket.Receive(buffer2);
-
-            //Console.WriteLine(Encoding.UTF8.GetString(buffer2));
+            
+            Console.WriteLine(Encoding.UTF8.GetString(buffer2));
             serverSocket.Close();
 
         }

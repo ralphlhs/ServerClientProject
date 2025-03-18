@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -12,6 +13,11 @@ namespace Server
     {
         static void Main(string[] args)
         {
+            var json = new JObject();
+            json.Add("message", 
+                "https://discordapp.com/channels/1329683146446471231/1329684212747599924/1351346155908497509");
+
+
             Socket listensocket = new Socket(AddressFamily.InterNetwork,
                 SocketType.Stream, ProtocolType.Tcp); // OS에 소켓구멍 뚫기.
             IPEndPoint listenEndPoint = new IPEndPoint(IPAddress.Any, 4000);//IPAddress.Parse(000,000,000,00), 4000
@@ -40,7 +46,12 @@ namespace Server
                     isRunning = false;
                 }
 
-                int SendLength = clientSocket.Send(buffer);//주거나
+                string b = "https://discordapp.com/channels/1329683146446471231/1329684212747599924/1351346155908497509";
+
+                byte[] buffer2 = new byte[1024];
+                buffer2 = Encoding.UTF8.GetBytes(b);
+                int SendLength = clientSocket.Send(buffer2);//주거나
+
                 if (SendLength <= 0)
                 {
                     isRunning = false;

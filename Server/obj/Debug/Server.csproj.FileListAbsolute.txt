@@ -5,3 +5,13 @@ C:\Users\user\Documents\GitHub\Server\NetworkSample\Server\obj\Debug\Server.cspr
 C:\Users\user\Documents\GitHub\Server\NetworkSample\Server\obj\Debug\Server.csproj.CoreCompileInputs.cache
 C:\Users\user\Documents\GitHub\Server\NetworkSample\Server\obj\Debug\Server.exe
 C:\Users\user\Documents\GitHub\Server\NetworkSample\Server\obj\Debug\Server.pdb
+C:\Users\user\Documents\GitHub\Server\NetworkSample\ServerClientProject\Server\bin\Debug\Server.exe.config
+C:\Users\user\Documents\GitHub\Server\NetworkSample\ServerClientProject\Server\bin\Debug\Server.exe
+C:\Users\user\Documents\GitHub\Server\NetworkSample\ServerClientProject\Server\bin\Debug\Server.pdb
+C:\Users\user\Documents\GitHub\Server\NetworkSample\ServerClientProject\Server\bin\Debug\Newtonsoft.Json.dll
+C:\Users\user\Documents\GitHub\Server\NetworkSample\ServerClientProject\Server\bin\Debug\Newtonsoft.Json.xml
+C:\Users\user\Documents\GitHub\Server\NetworkSample\ServerClientProject\Server\obj\Debug\Server.csproj.AssemblyReference.cache
+C:\Users\user\Documents\GitHub\Server\NetworkSample\ServerClientProject\Server\obj\Debug\Server.csproj.CoreCompileInputs.cache
+C:\Users\user\Documents\GitHub\Server\NetworkSample\ServerClientProject\Server\obj\Debug\Server.csproj.Up2Date
+C:\Users\user\Documents\GitHub\Server\NetworkSample\ServerClientProject\Server\obj\Debug\Server.exe
+C:\Users\user\Documents\GitHub\Server\NetworkSample\ServerClientProject\Server\obj\Debug\Server.pdb
