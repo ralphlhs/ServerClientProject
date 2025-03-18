@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -16,9 +17,26 @@ namespace Client
         
         static void Main(string[] args)
         {
+            Socket clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            //소켓뚫기
+            IPEndPoint listenEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 4000);
+            //목적지 주소. 서버랜카드ip
+            clientSocket.Connect(listenEndPoint);
+            //서버에 전화하고 들어가기. 
+
+            string jsonString = "{\"message\" : \"안녕하세요\"}";
+            byte[] message = Encoding.UTF8.GetBytes(jsonString);
+            int SendLength = clientSocket.Send(message);
+
+        }
+
+
+        static void Mywork()
+        {
             var json = new JObject();
             json.Add("message", "안녕하세요.");
             Console.WriteLine(json);
+
 
             Socket serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             //소켓뚫기
@@ -40,10 +58,43 @@ namespace Client
             //블럭킹
             byte[] buffer2 = new byte[1024];
             int RecvLength = serverSocket.Receive(buffer2);
-            
+
             Console.WriteLine(Encoding.UTF8.GetString(buffer2));
             serverSocket.Close();
+        }
+        static void FileClientProcess()
+        {
+            Socket serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
+            IPEndPoint endPoint = new IPEndPoint(IPAddress.Loopback, 4000);
+
+            serverSocket.Connect(endPoint);
+
+            string path = "./e.webp";
+            FileStream fs = new FileStream(path, FileMode.Create);
+            BinaryWriter bw = new BinaryWriter(fs);
+
+            //byte[] imageBytes = new byte[100000];
+
+            bool isCompleted = false;
+            while (!isCompleted)
+            {
+                byte[] receiveBuffer = new byte[1024];
+                int receiveSize = serverSocket.Receive(receiveBuffer);
+
+                if (receiveSize != 1024)
+                {
+                    bw.Write(receiveBuffer);
+                    isCompleted = true;
+                }
+                else
+                {
+                    bw.Write(receiveBuffer);
+                }
+            }
+
+            serverSocket.Close();
         }
     }
 }
+
